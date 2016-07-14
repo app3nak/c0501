@@ -20,7 +20,7 @@ var expresscaredomain = "guamservices.org";
 var app_version="1.0.7";
 var baseUrl = "http://guamservices.org/index_mobile";
 var googleanalyticsid = 'UA-57301113-43';
-//var google_project_id = "424588564899";
+var google_project_id = "424588564899";
 //var pushapi_domain = "http://getsetpush.com/dev1/";
 //var pushapi_appcode = "GSP-052616-9";
 var ref;
@@ -75,7 +75,14 @@ var app = {
 			alert("fail");
 		};	
 			
-
+		var push = PushNotification.init({
+            "android": {
+                "senderID": google_project_id
+            },
+            "ios": {"alert": "true", "badge": "true", "sound": "true"}, 
+            "windows": {} 
+        });
+		
 		push.on('registration', function(data) {
             console.log("registration event");
 			var regID = data.registrationId;
@@ -147,7 +154,13 @@ var app = {
 			{
 				alert("fail");
 			};	
-
+			var push = PushNotification.init({
+				"android": {
+					"senderID": google_project_id
+				},
+				"ios": {"alert": "true", "badge": "true", "sound": "true"}, 
+				"windows": {} 
+			});
            push.on('registration', function(data) {
 				var regID = data.registrationId;	
 				
@@ -164,7 +177,6 @@ var app = {
 						}, 5000);
 				}
 				else{
-					
 
 					
 					ref = cordova.InAppBrowser.open(jumptourl, '_blank', 'location=no,hidden=yes,zoom=no,toolbar=no,suppressesIncrementalRendering=yes,disallowoverscroll=yes');
