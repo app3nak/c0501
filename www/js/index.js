@@ -76,11 +76,10 @@ var app = {
 		};	
 			
 
-		
 		push.on('registration', function(data) {
-           // console.log("registration event");
+            console.log("registration event");
 			var regID = data.registrationId;
-            //console.log(JSON.stringify(data));
+            console.log(JSON.stringify(data));
 			
 			var d = new Date();
 			var randomtime = d.getTime();
@@ -94,6 +93,7 @@ var app = {
 			}
 			else{		
 
+				
 				ref = cordova.InAppBrowser.open(baseUrl+urlParam, '_blank', 'location=no,hidden=yes,zoom=no,toolbar=no,suppressesIncrementalRendering=yes,disallowoverscroll=yes');
 				
 				ref.addEventListener("loadstop", function() {
@@ -164,6 +164,9 @@ var app = {
 						}, 5000);
 				}
 				else{
+					
+
+					
 					ref = cordova.InAppBrowser.open(jumptourl, '_blank', 'location=no,hidden=yes,zoom=no,toolbar=no,suppressesIncrementalRendering=yes,disallowoverscroll=yes');
 								   
 					ref.addEventListener("loadstop", function() {
