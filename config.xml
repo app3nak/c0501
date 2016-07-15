@@ -35,10 +35,7 @@
     <gap:plugin name="cordova-plugin-device" source="npm"/>
     <gap:plugin name="cordova-plugin-google-analytics" source="npm"/>
     <gap:plugin name="cordova-plugin-whitelist" source="npm"/>
-   
-    
     <gap:plugin name="hu.dpal.phonegap.plugins.uniquedeviceid" />
-    
     <gap:plugin name="cordova-plugin-customurlscheme" source="npm">
         <param name="URL_SCHEME" value="guamservicesapp" />
         <param name="HTTP_HOST" value="www.guamservices.org" />
