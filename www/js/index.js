@@ -16,13 +16,13 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-var expresscaredomain = "guamservices.org";
+var mainsitedomain = "guamservices.org";
 var app_version="1.0.7";
 var baseUrl = "http://guamservices.org/index_mobile";
 var googleanalyticsid = 'UA-57301113-43';
 var google_project_id = "424588564899";
-var pushapi_domain = "http://getsetpush.com/dev1/";
-var pushapi_appcode = "GSP-052616-9";
+//var pushapi_domain = "http://getsetpush.com/dev1/";
+//var pushapi_appcode = "GSP-052616-9";
 var ref;
 var urlParam = "";
 
@@ -75,47 +75,28 @@ var app = {
 			alert("fail");
 		};	
 			
-		var push = PushNotification.init({
-            "android": {
-                "senderID": google_project_id
-            },
-            "ios": {"alert": "true", "badge": "true", "sound": "true"}, 
-            "windows": {} 
-        });
-		
-		push.on('registration', function(data) {
-            console.log("registration event");
-			var regID = data.registrationId;
-            console.log(JSON.stringify(data));
+
+           // console.log("registration event");
+			//var regID = data.registrationId;
+           // console.log(JSON.stringify(data));
 			
 			var d = new Date();
 			var randomtime = d.getTime();
 			
-			urlParam = "?device="+device.model+"&device_id="+udid+"&device_version="+device.version+"&device_os="+device.platform+"&device_notification_id="+regID+"&app_version="+app_version+"&randomier="+randomtime+"&jump_to=";
+			urlParam = "?device="+device.model+"&device_id="+udid+"&device_version="+device.version+"&device_os="+device.platform+"&app_version="+app_version+"&randomier="+randomtime+"&jump_to=";
 		
 			var networkState = checkConnection();		
 			if (networkState == Connection.NONE) {				
 					setTimeout(function(){ window.location  = "park.html"; //alert('Cannot connect to server!');
 					}, 5000);
 			}
-			else{		
-				$.post( pushapi_domain+"device_register", {
-					'code' : pushapi_appcode
-					,'os' : device.platform
-					,'identifier' : udid
-					,'push_identifier' : regID
-					,'ok' : 1
-				}, function(data) {
-					//alert(data);
-				  //console.log( data.name ); // John
-				  //console.log( data.time ); // 2pm
-				});
+			else{	
 				
 				ref = cordova.InAppBrowser.open(baseUrl+urlParam, '_blank', 'location=no,hidden=yes,zoom=no,toolbar=no,suppressesIncrementalRendering=yes,disallowoverscroll=yes');
 				
 				ref.addEventListener("loadstop", function() {
 					if(isIABLoaded==0){
-						setTimeout(function(){ ;ref.show(); 
+						setTimeout(function(){ ref.show(); 
 							}, 5000);						
 						isIABLoaded=1;
 					}
@@ -147,95 +128,7 @@ var app = {
 				});
 			}	 		
 						
-		});
 		
-		push.on('notification', function(data) {
-        	console.log("notification event");
-            console.log(JSON.stringify(data));
-			var regID = "";
-			window.plugins.uniqueDeviceID.get(success, fail);
-			var udid;
-			var allegatourl = encodeURIComponent(data.additionalData.allegato);
-			function success(uuid)
-			{
-				udid = uuid;
-			};
-			function fail()
-			{
-				alert("fail");
-			};	
-			var push = PushNotification.init({
-				"android": {
-					"senderID": google_project_id
-				},
-				"ios": {"alert": "true", "badge": "true", "sound": "true"}, 
-				"windows": {} 
-			});
-           push.on('registration', function(data) {
-				var regID = data.registrationId;	
-				
-				var d = new Date();
-				var randomtime = d.getTime();	
-				
-				var param_url = "?device="+device.model+"&device_id="+udid+"&device_version="+device.version+"&device_os="+device.platform+"&device_notification_id="+regID+"&app_version="+app_version+"&randomier="+randomtime+"&jump_to=";	
-							
-				var jumptourl = baseUrl+param_url+allegatourl;
-			
-				var networkState = checkConnection();		
-				if (networkState == Connection.NONE) {				
-						setTimeout(function(){ window.location  = "park.html"; //alert('Cannot connect to server!');
-						}, 5000);
-				}
-				else{
-					
-					$.post( pushapi_domain+"device_register", {
-						'code' : pushapi_appcode
-						,'os' : device.platform
-						,'identifier' : udid
-						,'push_identifier' : regID
-						,'ok' : 1
-					}, function(data) {
-						//alert(data);
-					  //console.log( data.name ); // John
-					  //console.log( data.time ); // 2pm
-					});
-					
-					ref = cordova.InAppBrowser.open(jumptourl, '_blank', 'location=no,hidden=yes,zoom=no,toolbar=no,suppressesIncrementalRendering=yes,disallowoverscroll=yes');
-								   
-					ref.addEventListener("loadstop", function() {
-							ref.show();		
-							
-					}); 
-					
-					ref.addEventListener("loadstart", closeInAppBrowser);
-			
-					ref.addEventListener("loaderror", loaderrorcheck);
-					
-					ref.addEventListener('exit', function(event) {			
-						if (sessionStorage.openedIAB &&  sessionStorage.openedIAB == 1) {
-							sessionStorage.openedIAB = 0;
-							//navigator.app.exitApp(); 
-							if(navigator.app){
-								navigator.app.exitApp();
-							}else if(navigator.device){
-								navigator.device.exitApp();
-								
-							}
-						}
-					});
-					ref.addEventListener('exit', function(event) {			
-						if (sessionStorage.openedIAB &&  sessionStorage.openedIAB == 1) {
-							sessionStorage.openedIAB = 0;
-							navigator.app.exitApp(); 
-						}
-					});
-				}				
-			});
-		});
-		
-		push.on('error', function(e) {
-            console.log("push error");
-        });	
 		
 		window.analytics.startTrackerWithId(googleanalyticsid);
 		window.analytics.trackView('Home Screen');
@@ -295,7 +188,7 @@ function closeInAppBrowser(event) {
 		iap1.addEventListener('loadstart', closeInAppBrowser);
 		iap1.addEventListener('loaderror', loaderrorcheck);
 	}
-	else if (!event.url.match(expresscaredomain) && event.url!="" && !event.url.match("tel:")) {
+	else if (!event.url.match(mainsitedomain) && event.url!="" && !event.url.match("tel:")) {
 		iap1 = window.open(event.url, "_system",null);
 		execinsideiap1('history.back();location.reload();');
 		iap1.addEventListener('loadstart', closeInAppBrowser);
