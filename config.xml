@@ -1,14 +1,14 @@
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="org.guamservices.app" version="1.0.7" xmlns:android = "http://schemas.android.com/apk/res/android">
-    <name>Guam Services</name>
-    <description>Guam Services</description>
-    <author href="http://guamservices.org/" email="support@phonegap.com">GuamWEBZ</author>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.area.app" version="1.0.7" xmlns:android = "http://schemas.android.com/apk/res/android">
+    <name>ARea</name>
+    <description>ARea</description>
+    <author href="http://www.retailah.com/" email="support@phonegap.com">Nakulsoft</author>
     <content src="index.html"/>
     
     <gap:platform name="android" />
     <gap:platform name="ios" />
     <gap:platform name="winphone" />
 	
-	<preference name="phonegap-version" value="cli-6.1.0" />    
+	<preference name="phonegap-version" value="cli-6.5.0" />    
     <preference name="permissions" value="none"/>
     <preference name="orientation" value="portrait"/>
     <preference name="target-device" value="universal"/>
@@ -33,10 +33,7 @@
     <gap:plugin name="cordova-plugin-inappbrowser" source="npm" />
     <gap:plugin name="cordova-plugin-network-information" source="npm" />
     <gap:plugin name="cordova-plugin-device" source="npm"/>
-    <gap:plugin name="cordova-plugin-google-analytics" source="npm"/>
     <gap:plugin name="cordova-plugin-whitelist" source="npm"/>
-      
-    <gap:plugin name="hu.dpal.phonegap.plugins.uniquedeviceid" />
     
     <gap:plugin name="cordova-plugin-customurlscheme" source="npm">
         <param name="URL_SCHEME" value="guamservicesapp" />

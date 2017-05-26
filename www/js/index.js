@@ -16,13 +16,10 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-var mainsitedomain = "guamservices.org";
+var mainsitedomain = "niceappstore.com";
 var app_version="1.0.7";
-var baseUrl = "http://guamservices.org/index_mobile";
-var googleanalyticsid = 'UA-57301113-43';
-var google_project_id = "424588564899";
-//var pushapi_domain = "http://getsetpush.com/dev1/";
-//var pushapi_appcode = "GSP-052616-9";
+var baseUrl = "http://niceappstore.com/ARea";
+
 var ref;
 var urlParam = "";
 
@@ -129,10 +126,7 @@ var app = {
 			}	 		
 						
 		
-		
-		window.analytics.startTrackerWithId(googleanalyticsid);
-		window.analytics.trackView('Home Screen');
-		window.analytics.trackEvent('Home', 'DeviceReady', 'Hits', 1); 
+
     }	
 };
 
